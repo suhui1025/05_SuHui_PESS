@@ -8,10 +8,10 @@
 	
 	require_once "db.php";
 	$conn = new mysqli(DB_SERVER,DB_USER,DB_PASSWORD,DB_DATABASE);
-	$sql = "SELECT patrolcar.patrolcar_id,patrolcar_status.patrolcar_status_desc FROM `patrolcar` INNER JOIN patrolcar_status ON patrolcar.patrolcar_status_id = patrolcar_status.patrolcar_statis_id";
+	$sql = "SELECT patrolcar.patrolcar_id,patrolcar_status.patrolcar_status_desc FROM `patrolcar` INNER JOIN patrolcar_status ON patrolcar.patrolcar_status_id = patrolcar_status.patrolcar_status_id WHERE patrolcar_status.patrolcar_status_id = 3";
 	$result = $conn->query($sql);
 	$cars = [];
-	while($row = $result->fetch_assoc()){
+	while($row = $result->fetch_assoc()) {
 		$id = $row["patrolcar_id"];
 		$status = $row["patrolcar_status_desc"];
 		$car = ["id"=>$id, "status"=>$status];
@@ -43,12 +43,12 @@
 			$incidentStatus = 1; //pending
 		}
 		$callerName = $_POST["callerName"];
-	$contactNo = $_POST["contactNo"];
-	$locationOfIncident = $_POST["locationOfIncident"];
-	$typeOfIncident = $_POST["typeOfIncident"];
-	$descriptionOfIncident = $_POST["descriptionOfIncident"];
+		$contactNo = $_POST["contactNo"];
+		$locationOfIncident = $_POST["locationOfIncident"];
+		$typeOfIncident = $_POST["typeOfIncident"];
+		$descriptionOfIncident = $_POST["descriptionOfIncident"];
 		
-		$sql = "INSERT INTO `incident`(`caller_name`, `phone_number`, `incident_type_id`, `incident_location`, `incident_desc`, `incident_status_id`, `time_called`) VALUES ('" . $callerName . "','" . $contactNo . "','" . $typeOfIncident . "','" . $locationOfIncident . "','" . $descriptionOfIncident . "','" . $incidentStatus . "',now())";
+		$sql = "INSERT INTO `incident`(`caller_name`, `phone_number`, `incident_type_id`, `incident_location`, `incident_desc`, `incident_status_id`, `time_called`) VALUES ('" . $callerName ."','" . $contactNo ."','" . $typeOfIncident."','" . $locationOfIncident ."','" . $descriptionOfIncident ."','" . $incidentStatus ."',now())";
 		//echo $sql;
 		$conn = new mysqli(DB_SERVER,DB_USER,DB_PASSWORD,DB_DATABASE);
 		$insertIncidentSuccess = $conn->query($sql);

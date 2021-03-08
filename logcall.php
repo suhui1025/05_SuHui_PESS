@@ -5,9 +5,8 @@
 	$result = $conn->query($sql);
 	$incidentTypes = [];
 	while($row = $result->fetch_assoc()){
-		$id = $row["incident_type_id"];
 		$type = $row["incident_type_desc"];
-		$incidentType = ["id"=>$id, "type"=>$type];
+		$incidentType = ["type"=>$type];
 		array_push($incidentTypes,$incidentType);
 	}
 	$conn->close();
@@ -53,7 +52,7 @@
 				<option value="">Select</option>
 			  	<?php
 			  		foreach($incidentTypes as $incidentType){
-						echo "<option value=\"" . $incidentType["id"] . "\">" . $incidentType["type"] . "</option>";
+						echo "<option>" . $incidentType["type"] . "</option>";
 					}
 			  ?>
 			</select>
